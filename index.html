@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$2 Bitcoin Bills</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.ico"> <!-- Add this line -->
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+        .intro img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        .lookup {
+            margin: 20px 0;
+            padding: 0px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        .lookup-image {
+            max-width: 450px; /* Adjust this value as needed */
+            height: auto;
+            margin: 10px 0; /* Adds space above and below the image */
+            display: block; /* Ensures the image behaves like a block element */
+        }
+        .faq {
+        margin: 20px 0;
+        }
+        .faq details {
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .faq summary {
+            cursor: pointer;
+            font-weight: 700;
+            padding: 10px 15px;
+            color: #333;
+            transition: background-color 0.3s;
+            list-style: none; /* Removes the default marker */
+        }
+        .faq summary::-webkit-details-marker {
+            display: none; /* Hides the arrow in WebKit browsers (Chrome, Safari) */
+        }
+
+        .faq summary::marker {
+            display: none; /* Hides the arrow in Firefox and other modern browsers */
+        }
+        .faq details > *:not(summary) {
+            padding: 10px 15px;
+            margin: 0;
+            color: #444;
+        }
+        input, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 10px;
+            font-style: italic;
+        }
+        hr {
+            border: 1px solid #808080;
+            margin: 80px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="bitcoin.png" width="75" height="75">
+        <h1>$2 bills loaded with Bitcoin</h1>
+    </header>
+
+    <section class="intro">
+        <img src="bill-front.jpeg" alt="Front of a Bitcoin2s $2 bill">
+        <img src="bill-back.jpeg" alt="Back of a Bitcoin2s $2 bill with private key">
+        <h2></h2>
+        <p>Each bill contains a private key to a wallet with $2 worth of bitcoin at the moment of its creation.</p>
+        <p>These bills explore the changing value of two forms of money sharing the same medium. Starting at equal value, how will the purchasing power of the dollars and bitcoin change over time?
+
+        </p>
+    </section>
+
+    <hr>
+
+    <section class="lookup">
+        <h2>Check Your Bitcoin Balance</h2>
+        <p>Enter your bill's serial number to see its bitcoin wallet balance:</p>
+        <img src="serial-highlight-zoom4.png" class="lookup-image">
+         <!--<img src="serial-highlight.jpg" class="lookup-image">-->
+        <input type="text" id="serialInput" placeholder="L28972173A">
+        <button onclick="checkSerial()">Lookup</button>
+        <div id="result"></div>
+        
+    </section>
+
+    <hr>
+
+    <section class="faq">
+        <h2>FAQ</h2>
+        <details open>
+            <summary>What is Bitcoin?</summary>
+            <p>Bitcoin is a digital currency created in 2009 that operates without banks. It uses technology to enable fast, low-cost payments worldwide. Bitcoin is limited in supply, and its value can change over time.</p>
+        </details>
+        <details open>
+            <summary>What is a bitcoin private key?</summary>
+            <p>A private key is a secret code that lets you spend the bitcoin in a wallet. Keep it safe and don’t share it!</p>
+            <p>This is the only copy of your private key and the only way to access your bitcoin.</p>
+        </details>
+        <details open>
+            <summary>How do I claim my bitcoin?</summary>
+            <p>The bitcoin is yours just by holding the private key. If you'd like to access it, remove the security sticker to reveal the 52 character private key. Download a bitcoin wallet app (like BlueWallet or Sparrow), select "Import Wallet," and enter the private key from your bill.</p>
+        </details>
+        <details open>
+            <summary>Is my $2 bill still spendable?</summary>
+            <p>Yes! The bitcoin wallet and text on the bill does not impact its value or function. You can remove the sticker to store your bitcoin key separately, or pass it forward by spending the bill with the wallet attached (I have not tried spending these with a clerk, but you could give it as a tip).</p>
+        </details>
+        <details open>
+            <summary>Why is my bitcoin balance worth less than $2?</summary>
+            <p>The value was $2 when we created the bill. The value of bitcoin can fluctuate relative to the dollar, so it's possible that your balance is more or less than $2 at any time. If the balance is 0, someone may have gotten access to your private key and moved the bitcoin.</p>
+        </details>
+        <details open>
+            <summary>How do I know if someone already spent my bitcoin?</summary>
+            <p>The bitcoin private keys are kept behind a security sticker. If someone peeled off the sticker and tried to put it back, the sticker would have the word "VOID" written across it. If your bill is missing the sticker entirely, then someone removed it and the bill is now worth its face value of $2.</p>
+        </details>
+        <details open>
+            <summary>How are these made?</summary>
+            <p>Bitcoin addresses are generated on an offline, airgapped computer. That address is funded with $2 worth of bitcoin at the moment of creation.</p> 
+            <p>A Smith Corona typewriter is used to type the private key, balance, date, exchange rate, URL, and bill number. The paper holding the private key is adhered to the bill using a tamper proof sticker.</p>  
+            <p>I do not keep copies of the private keys, and at no point is the private key connected to the internet.</p>
+        </details>
+    </section>
+
+    <!-- Firebase Initialization and Search Logic (Modular Syntax) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyDy8O_m-paj3iBb83lHHUYOxTKsOQssq5Q",
+        authDomain: "bitcoin2s.firebaseapp.com",
+        projectId: "bitcoin2s",
+        storageBucket: "bitcoin2s.firebasestorage.app",
+        messagingSenderId: "490668509865",
+        appId: "1:490668509865:web:15d0f2b266f79b356077b8",
+        measurementId: "G-YVP2J1LW9Q"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Expose checkSerial to global scope
+    window.checkSerial = async function() {
+        const serialInput = document.getElementById("serialInput").value.trim();
+        const resultDiv = document.getElementById("result");
+
+        // Clean the input: remove spaces and convert to uppercase
+        const serial = serialInput.replace(/\s/g, '').toUpperCase();
+
+        if (!serial) {
+            resultDiv.innerHTML = "Please enter a serial number.";
+            return;
+        }
+
+        resultDiv.innerHTML = "Searching...";
+        console.log("Searching for serial:", serial);
+
+        try {
+            const docRef = doc(db, "bills", serial);
+            const docSnap = await getDoc(docRef);
+            console.log("Doc snapshot:", docSnap.exists(), docSnap.data());
+
+            if (docSnap.exists()) {
+                const address = docSnap.data().publicKey;
+                resultDiv.innerHTML = `Wallet found! Check it here: <a href="https://bitref.com/${address}" target="_blank">${address}</a>`;
+            } else {
+                resultDiv.innerHTML = "Serial number not found. Double-check your entry.";
+            }
+        } catch (error) {
+            resultDiv.innerHTML = "Error checking serial number. Try again later.";
+            console.error("Error:", error);
+        }
+    };
+</script>
+</body>
+<footer>
+    <p>Handmade in the real world.  © 2025</p>
+</footer>
+</html>
